@@ -9,8 +9,9 @@ const Editor = ({ initData, onSubmit }) => {
 
   const [state, setState] = useState({
     date: getFormattedDate(new Date()),
-    emotionId: 3,
+    emotionId: 5,
     content: "",
+    phone: "",
   });
 
   useEffect(() => {
@@ -35,6 +36,12 @@ const Editor = ({ initData, onSubmit }) => {
       content: e.target.value,
     });
   };
+  const handleChangePhone = (e) => {
+    setState({
+      ...state,
+      phone: e.target.value,
+    });
+  };
 
   const handleSubmit = () => {
     onSubmit(state);
@@ -54,13 +61,13 @@ const Editor = ({ initData, onSubmit }) => {
   return (
     <div className="Editor">
       <div className="editor_section">
-        <h4>오늘의 날짜</h4>
+        <h4>회원가입일</h4>
         <div className="input_wrapper">
           <input type="date" value={state.date} onChange={handleChangeDate} />
         </div>
       </div>
       <div className="editor_section">
-        <h4>오늘의 감정</h4>
+        <h4>회원등급</h4>
         <div className="input_wrapper emotion_list_wrapper">
           {emotionList.map((it) => (
             <EmotionItem
@@ -73,18 +80,21 @@ const Editor = ({ initData, onSubmit }) => {
         </div>
       </div>
       <div className="editor_section">
-        <h4>오늘의 일기</h4>
+        <h4>회원이름</h4>
         <div className="input_wrapper">
           <textarea
-            placeholder="오늘은 어땠나요?"
             value={state.content}
             onChange={handleChangeContent}
           />
         </div>
+        <h4>회원 전화번호</h4>
+        <div className="input_wrapper">
+          <textarea value={state.phone} onChange={handleChangePhone} />
+        </div>
       </div>
       <div className="editor_section bottom_section">
         <Button text={"취소하기"} onClick={handleOnGoBack} />
-        <Button text={"작성완료"} type={"positive"} onClick={handleSubmit} />
+        <Button text={"수정하기"} type={"positive"} onClick={handleSubmit} />
       </div>
     </div>
   );

@@ -10,31 +10,13 @@ function reducer(state, action) {
   switch (action.type) {
     case "CREATE":
       return [action.data, ...state];
-    // const newState = [action.data, ...state];
-    // localStorage.setItem("diary", JSON.stringify(newState));
-    // return newState;
-
     case "UPDATE": {
       return state.map((it) =>
-        String(it.id) === String(action.data.id)
-          ? {
-              ...action.data,
-            }
-          : it
+        String(it.id) === String(action.data.id) ? { ...action.data } : it
       );
-      // const newState = state.map((it) =>
-      //   String(it.id) === String(action.data.id) ? { ...action.data } : it
-      // );
-      // localStorage.setItem("diary", JSON.stringify(newState));
-      // return newState;
     }
     case "DELETE": {
       return state.filter((it) => String(it.id) !== String(action.targetId));
-      // const newState = state.filter(
-      //   (it) => String(it.id) !== String(action.targetId)
-      // );
-      // localStorage.setItem("diary", JSON.stringify(newState));
-      // return newState;
     }
     case "INIT": {
       return action.data;
@@ -48,20 +30,16 @@ const mockData = [
   {
     id: 0,
     date: new Date().getTime() - 1,
-    content: "mock1",
+    content: "박보건",
+    phone: "010-2345-2345",
     emotionId: 1,
   },
   {
     id: 1,
     date: new Date().getTime() - 2,
-    content: "mock2",
+    content: "우효림",
+    phone: "010-1234-1234",
     emotionId: 2,
-  },
-  {
-    id: 2,
-    date: new Date().getTime() - 3,
-    content: "mock3",
-    emotionId: 3,
   },
 ];
 
@@ -77,37 +55,29 @@ function App() {
       data: mockData,
     });
     setIsDataLoded(true);
-    // const rawData = localStorage.getItem("diary");
-    // const localData = JSON.stringify(rawData)
-    //   if(localData.length ===0) {
-    //     dispatch({
-    //       setIsDataLoded(true)
-    //       return
-    //     }
-    //     localData.sort((a, b) => b.date - a.date)
-    //   )
-    //   }
   }, []);
 
-  const onCreate = (date, content, emotionId) => {
+  const onCreate = (date, content, phone, emotionId) => {
     dispatch({
       type: "CREATE",
       data: {
         id: idRef.current,
         date: new Date(date).getTime(),
         content,
+        phone,
         emotionId,
       },
     });
     idRef.current += 1;
   };
-  const onUpdate = (targetId, date, content, emotionId) => {
+  const onUpdate = (targetId, date, content, phone, emotionId) => {
     dispatch({
       type: "UPDATE",
       data: {
         id: targetId,
         date: new Date(date).getTime(),
         content,
+        phone,
         emotionId,
       },
     });

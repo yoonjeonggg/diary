@@ -1,10 +1,9 @@
-import React from "react"; //여기서 최적화 안함
 import "./DiaryItem.css";
 import { getEmotionImgById } from "../utils";
 import { useNavigate } from "react-router-dom";
 import Button from "./Button";
 
-const DiaryItem = ({ id, emotionId, content, date }) => {
+const DiaryItem = ({ id, emotionId, content, date, phone }) => {
   const navigate = useNavigate();
 
   const goDetail = () => {
@@ -26,10 +25,11 @@ const DiaryItem = ({ id, emotionId, content, date }) => {
           {new Date(parseInt(date)).toLocaleDateString()}
         </div>
         <div className="content_wrapper">{content.slice(0, 25)}</div>
+        <div className="content_wrapper">{phone.slice(0, 25)}</div>
       </div>
 
       <div className="button_section">
-        <Button onClick={goEdit} text="수정하기" />
+        <Button onClick={goEdit} text="회원정보수정" />
       </div>
     </div>
   );

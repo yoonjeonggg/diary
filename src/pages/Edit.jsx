@@ -7,28 +7,26 @@ import { DiaryDispatchContext } from "../App";
 import Editor from "../components/Editor";
 const Edit = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
   const { onDelete, onUpdate } = useContext(DiaryDispatchContext);
+  const data = useDiray(id);
 
   const onClickDelete = () => {
-    if (
-      window.confirm("일기를 정말 삭제하시겠습니까? 다시 복구되지 않습니다.")
-    ) {
+    if (window.confirm("회원정보를 삭제할까요? 다시 복구되지 않아요!")) {
       onDelete(id);
       navigate("/", { replace: true });
     }
   };
   const onSubmit = (data) => {
-    if (window.confirm("일기를 정말 수정하겠습니까?")) {
-      const { date, content, emotionId } = data;
-      onUpdate(id, date, content, emotionId);
+    if (window.confirm("회원정보를 수정할까요?")) {
+      const { date, content, phone, emotionId } = data;
+      onUpdate(id, date, content, phone, emotionId);
       navigate("/", { replace: true });
     }
   };
   const goBack = () => {
     navigate(-1);
   };
-  const { id } = useParams();
-  const data = useDiray(id);
 
   if (!data) {
     return <div>일기를 불러 오는 중입니다.</div>;
@@ -36,11 +34,11 @@ const Edit = () => {
     return (
       <div>
         <Header
-          title={"일기수정하기"}
-          leftChild={<Button text={"뒤로가기"} onClick={goBack} />}
+          title={"회원정보수정"}
+          leftChild={<Button text={"<뒤로 가기"} onClick={goBack} />}
           rightChild={
             <Button
-              text={"삭제하기"}
+              text={"회원삭제"}
               type={"negative"}
               onClick={onClickDelete}
             />

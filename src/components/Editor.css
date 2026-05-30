@@ -24,10 +24,12 @@ textarea {
 }
 
 .Editor textarea {
-  width: 100%;
-  min-height: 200px;
+  /* width: 100%;
+  min-height: 200px; */
   box-sizing: border-box;
   resize: vertical;
+  width: 400px;
+  height: 100px;
 }
 
 .Editor .bottom_section {

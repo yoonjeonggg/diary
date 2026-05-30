@@ -57,6 +57,7 @@
   border-radius: 5px;
   word-break: keep-all;
   overflow-wrap: break-word;
+  align-items: center;
 }
 
 .Viewer .content_wrapper p {

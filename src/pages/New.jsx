@@ -8,8 +8,8 @@ const New = () => {
   const navigate = useNavigate();
   const { onCreate } = useContext(DiaryDispatchContext);
   const onSubmit = (data) => {
-    const { date, content, emotionId } = data;
-    onCreate(date, content, emotionId);
+    const { date, content, phone, emotionId } = data;
+    onCreate(date, content, phone, emotionId);
     navigate("/", { replace: true });
   };
 
@@ -19,8 +19,8 @@ const New = () => {
   return (
     <div>
       <Header
-        title={"새 일기 쓰기"}
-        leftChild={<Button text={"뒤로가기"} onClick={goBack} />}
+        title={"신규회원등록"}
+        leftChild={<Button text={"< 뒤로 가기"} onClick={goBack} />}
       />
       <Editor onSubmit={onSubmit} />
     </div>
